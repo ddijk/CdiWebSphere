@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="com.mycompany_CdiWebSphere_war_1.0-SNAPSHOTPU" transaction-type="JTA">
+    <!-- websphere -->
+   
+    <jta-data-source>jdbc/GlassfishDS</jta-data-source>
+    
+    <!-- glassfish -->
+    <!--
+      <jta-data-source>jdbc/__default</jta-data-source>
+      -->
+      <!-- weblogic -->
+      <!--
+    <jta-data-source>jdbc/GlassfishDS</jta-data-source>
+    -->
+    <class>com.mycompany.cdiwebsphere.Customer</class>
+    <class>com.mycompany.cdiwebsphere.DiscountCode</class>
+    <class>com.mycompany.cdiwebsphere.MicroMarket</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+    </properties>
+  </persistence-unit>
+</persistence>
