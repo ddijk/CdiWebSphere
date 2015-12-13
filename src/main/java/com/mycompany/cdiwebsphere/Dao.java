@@ -7,8 +7,8 @@ package com.mycompany.cdiwebsphere;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.apache.log4j.Logger;
 
 /**
@@ -18,9 +18,11 @@ import org.apache.log4j.Logger;
 @Stateless
 public class Dao {
 
-    @PersistenceContext
+    @Inject
     EntityManager em;
 
+//    @Inject
+//    Event<Customer> entityEvent;
     private static final Logger logger = Logger.getLogger(Dao.class);
     private static final String ZIPCODE = "2411LN";
     private static final String DISCOUNT_CODE = "A";
@@ -28,13 +30,16 @@ public class Dao {
     public void saveCustomer(int key) {
 
         MicroMarket mm = getMarket();
-        Customer c = new Customer(key++);
+        Customer c = new Customer(key);
         c.setName("dick_" + key);
         c.setDiscountCode(getDc());
         c.setZip(mm);
 
+        em.joinTransaction();
+        System.out.println("TX joined");
         em.persist(c);
 
+        //   entityEvent.fire(c);
         logger.info("Customer saved with key " + key);
     }
 
